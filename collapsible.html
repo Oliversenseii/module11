@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Collapsible Text</title>
+<style>
+  :root{--bg:#f6f5f2;--ink:#14161a;--muted:#454a52;--line:#d6d2c9;--accent:#1d3557}
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);line-height:1.6;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:clamp(1.125rem,1.05rem + 0.4vw,1.375rem);
+  }
+  .page{width:min(100% - 2rem,64rem);margin:0 auto;padding:clamp(1.5rem,4vw,3rem) 0 clamp(3rem,8vw,6rem)}
+  .back{display:inline-block;color:var(--accent);font-weight:600;text-decoration:none;border-bottom:0.125rem solid currentColor;font-size:clamp(1rem,.95rem + .3vw,1.2rem)}
+  h1{font-size:clamp(2.75rem,2rem + 4vw,5rem);line-height:1.05;margin:clamp(1.5rem,4vw,3rem) 0 clamp(2rem,5vw,4rem);letter-spacing:-0.03em}
+  section{background:#fff;border:0.0625rem solid var(--line);border-radius:0.5rem;padding:clamp(1.25rem,3vw,2.5rem);margin-bottom:clamp(1rem,2.5vw,1.75rem)}
+  h2{font-size:clamp(1.5rem,1.25rem + 1.2vw,2.25rem);margin:0 0 0.75rem;letter-spacing:-0.01em}
+  .label{display:block;font-size:clamp(.85rem,.8rem + .2vw,1rem);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+  p{margin:0;color:var(--muted)}
+  ul{margin:0;padding-left:1.4rem;color:var(--muted)}
+  li{margin-bottom:.4rem}
+  .cols{display:grid;gap:clamp(1rem,2.5vw,1.75rem);grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr))}
+  .cols section{margin-bottom:0}
+  .cols-wrap{margin-bottom:clamp(1rem,2.5vw,1.75rem)}
+  .names{display:flex;flex-wrap:wrap;gap:.6rem}
+  .names span{border:0.125rem solid var(--ink);color:var(--ink);font-weight:600;padding:.35rem 1rem;border-radius:999px}
+
+  /* Accordion demo */
+  .acc{margin-top:1.25rem}
+  details{border:0.125rem solid var(--line);border-radius:0.5rem;margin-bottom:.75rem;background:#fff;transition:border-color .2s}
+  details:hover,details[open]{border-color:var(--ink)}
+  summary{
+    list-style:none;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;gap:1rem;
+    padding:clamp(1rem,2.2vw,1.4rem);
+    font-weight:700;font-size:clamp(1.15rem,1.05rem + .5vw,1.5rem);
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:1.8rem;font-weight:400;line-height:1;color:var(--accent)}
+  details[open] summary::after{content:"\2212"}
+  details[open] summary{border-bottom:0.0625rem solid var(--line)}
+  .body{padding:clamp(1rem,2.2vw,1.4rem);color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <a class="back" href="index.html">Back to all widgets</a>
+  <h1>Collapsible Text</h1>
+
+  <section>
+    <span class="label">Definition</span>
+    <p>Collapsible text, also called an accordion, is a component where each section has a title that can be clicked to show or hide its content. It keeps long pages short and organized, and users open only what they need.</p>
+  </section>
+
+  <section>
+    <span class="label">Example</span>
+    <h2>Live demo</h2>
+    <p>Click a question to open or close its answer.</p>
+    <div class="acc">
+      <details open>
+        <summary>What is a UI widget?</summary>
+        <div class="body">A small, reusable piece of interface that does one specific job, such as a slider, a form, or a menu.</div>
+      </details>
+      <details>
+        <summary>Does it need JavaScript?</summary>
+        <div class="body">No. This demo uses the built-in HTML details element, so it opens and closes without any JavaScript.</div>
+      </details>
+      <details>
+        <summary>Can I change how it looks?</summary>
+        <div class="body">Yes. It is plain CSS, so you can change the colors, borders, fonts, and spacing to match your own design.</div>
+      </details>
+    </div>
+  </section>
+
+  <div class="cols cols-wrap">
+    <section>
+      <span class="label">Common uses</span>
+      <ul>
+        <li>FAQ sections</li>
+        <li>Help centers and documentation</li>
+        <li>Product details and specifications</li>
+        <li>Mobile menus and settings</li>
+      </ul>
+    </section>
+    <section>
+      <span class="label">Used on websites like</span>
+      <div class="names"><span>Apple Support</span><span>Shopee Help Center</span><span>Wikipedia (mobile)</span></div>
+    </section>
+  </div>
+
+  <div class="cols cols-wrap">
+    <section>
+      <span class="label">When to use</span>
+      <ul>
+        <li>The page has a lot of text</li>
+        <li>The content is split into clear topics</li>
+        <li>Most users need only one or two sections</li>
+      </ul>
+    </section>
+    <section>
+      <span class="label">When to avoid</span>
+      <ul>
+        <li>Key information everyone must read</li>
+        <li>Very short content</li>
+        <li>Content users need to compare side by side</li>
+      </ul>
+    </section>
+  </div>
+
+  <section>
+    <span class="label">Portfolio tip</span>
+    <h2>Can this be used in a portfolio?</h2>
+    <p>Yes. It works well for an FAQ, a list of services, or your work experience and skills. The page stays clean while anyone who wants the details can open them.</p>
+  </section>
+
+</div>
+</body>
+</html>

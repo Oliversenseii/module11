@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carousel</title>
+<style>
+  :root{--bg:#f6f5f2;--ink:#14161a;--muted:#454a52;--line:#d6d2c9;--accent:#1d3557}
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);line-height:1.6;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:clamp(1.125rem,1.05rem + 0.4vw,1.375rem);
+  }
+  .page{width:min(100% - 2rem,64rem);margin:0 auto;padding:clamp(1.5rem,4vw,3rem) 0 clamp(3rem,8vw,6rem)}
+  .back{display:inline-block;color:var(--accent);font-weight:600;text-decoration:none;border-bottom:0.125rem solid currentColor;font-size:clamp(1rem,.95rem + .3vw,1.2rem)}
+  h1{font-size:clamp(2.75rem,2rem + 4vw,5rem);line-height:1.05;margin:clamp(1.5rem,4vw,3rem) 0 clamp(2rem,5vw,4rem);letter-spacing:-0.03em}
+  section{background:#fff;border:0.0625rem solid var(--line);border-radius:0.5rem;padding:clamp(1.25rem,3vw,2.5rem);margin-bottom:clamp(1rem,2.5vw,1.75rem)}
+  h2{font-size:clamp(1.5rem,1.25rem + 1.2vw,2.25rem);margin:0 0 0.75rem;letter-spacing:-0.01em}
+  .label{display:block;font-size:clamp(.85rem,.8rem + .2vw,1rem);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+  p{margin:0;color:var(--muted)}
+  ul{margin:0;padding-left:1.4rem;color:var(--muted)}
+  li{margin-bottom:.4rem}
+  .cols{display:grid;gap:clamp(1rem,2.5vw,1.75rem);grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr))}
+  .cols section{margin-bottom:0}
+  .cols-wrap{margin-bottom:clamp(1rem,2.5vw,1.75rem)}
+  .names{display:flex;flex-wrap:wrap;gap:.6rem}
+  .names span{border:0.125rem solid var(--ink);color:var(--ink);font-weight:600;padding:.35rem 1rem;border-radius:999px}
+
+  /* Carousel demo */
+  .car{position:relative;overflow:hidden;border-radius:0.5rem;margin-top:1.25rem}
+  .track{display:flex;transition:transform .5s cubic-bezier(.65,0,.35,1)}
+  .slide{
+    min-width:100%;min-height:clamp(14rem,32vw,24rem);
+    display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    padding:clamp(1.5rem,4vw,3rem);color:#fff;
+  }
+  .slide h3{margin:0 0 .5rem;font-size:clamp(1.75rem,1.3rem + 2vw,3rem)}
+  .slide p{color:rgba(255,255,255,.88)}
+  .slide:nth-child(1){background:#1d3557}
+  .slide:nth-child(2){background:#3a3d44}
+  .slide:nth-child(3){background:#5b3a29}
+  .controls{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.25rem;flex-wrap:wrap}
+  .btn{
+    font:inherit;font-weight:600;cursor:pointer;
+    padding:.7rem 1.6rem;border-radius:0.4rem;
+    background:var(--ink);color:#fff;border:0.125rem solid var(--ink);
+    transition:background .2s,color .2s;
+  }
+  .btn:hover,.btn:focus-visible{background:#fff;color:var(--ink);outline:none}
+  .dots{display:flex;gap:.6rem}
+  .dots span{width:.9rem;height:.9rem;border-radius:50%;background:#c4c0b7;cursor:pointer;transition:all .3s}
+  .dots span.on{width:2.4rem;border-radius:999px;background:var(--accent)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <a class="back" href="index.html">Back to all widgets</a>
+  <h1>Carousel</h1>
+
+  <section>
+    <span class="label">Definition</span>
+    <p>A carousel, also called a slider, is a component that shows a set of images or cards one at a time. Users move between items using buttons, dots, or swipe gestures, which lets a lot of content fit in a small space.</p>
+  </section>
+
+  <section>
+    <span class="label">Example</span>
+    <h2>Live demo</h2>
+    <p>Use the buttons, the dots, or the left and right arrow keys.</p>
+    <div class="car">
+      <div class="track" id="track">
+        <div class="slide"><h3>Slide One</h3><p>Featured project or product</p></div>
+        <div class="slide"><h3>Slide Two</h3><p>Testimonial or announcement</p></div>
+        <div class="slide"><h3>Slide Three</h3><p>Another image or card</p></div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn" id="prev">Previous</button>
+      <div class="dots" id="dots"><span></span><span></span><span></span></div>
+      <button class="btn" id="next">Next</button>
+    </div>
+  </section>
+
+  <div class="cols cols-wrap">
+    <section>
+      <span class="label">Common uses</span>
+      <ul>
+        <li>Homepage banners and promotions</li>
+        <li>Product photo galleries</li>
+        <li>Customer testimonials</li>
+        <li>Featured projects or articles</li>
+      </ul>
+    </section>
+    <section>
+      <span class="label">Used on websites like</span>
+      <div class="names"><span>Shopee</span><span>Lazada</span><span>Netflix</span><span>Airbnb</span></div>
+    </section>
+  </div>
+
+  <div class="cols cols-wrap">
+    <section>
+      <span class="label">When to use</span>
+      <ul>
+        <li>You have a lot of content and little space</li>
+        <li>The items are visual, like photos or cards</li>
+        <li>The content is nice to see but not essential</li>
+      </ul>
+    </section>
+    <section>
+      <span class="label">When to avoid</span>
+      <ul>
+        <li>Important information everyone must see</li>
+        <li>Long text that needs careful reading</li>
+        <li>Auto-play that users cannot pause</li>
+      </ul>
+    </section>
+  </div>
+
+  <section>
+    <span class="label">Portfolio tip</span>
+    <h2>Can this be used in a portfolio?</h2>
+    <p>Yes. A carousel is a good way to showcase your projects. Give each slide a screenshot, a title, a short description, and a link. Keep it to three to five slides so visitors see your best work first.</p>
+  </section>
+
+</div>
+
+<script>
+  var i = 0, n = 3;
+  var track = document.getElementById('track');
+  var dots = document.querySelectorAll('#dots span');
+
+  function go(k){
+    i = (k + n) % n;
+    track.style.transform = 'translateX(-' + (i * 100) + '%)';
+    dots.forEach(function(d, j){ d.classList.toggle('on', j === i); });
+  }
+
+  document.getElementById('prev').onclick = function(){ go(i - 1); };
+  document.getElementById('next').onclick = function(){ go(i + 1); };
+  dots.forEach(function(d, j){ d.onclick = function(){ go(j); }; });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowLeft') go(i - 1);
+    if(e.key === 'ArrowRight') go(i + 1);
+  });
+  go(0);
+</script>
+</body>
+</html>
